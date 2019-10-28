@@ -12,11 +12,11 @@ void abstr_emp::ShowAll()const
 void abstr_emp::SetAll()
 {
 	cout << "Enter firstname: ";
-	getline(std::cin, fname);
+	getline(cin, fname);
 	cout << "Enter lastname: ";
-	getline(std::cin, lname);
+	getline(cin, lname);
 	cout << "Enter job: ";
-	getline(std::cin, job);
+	getline(cin, job);
 }
 
 ostream& operator<<(ostream& os, const abstr_emp& e)
