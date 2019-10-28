@@ -1,0 +1,70 @@
+#ifndef PERSON_H_
+#define PERSON_H_
+#include <string>
+#include <iostream>
+using std::string;
+using std::cout;
+using std::endl;
+using std::cin;
+class Person
+{
+private:
+	string last_name;
+	string first_name;
+protected:
+	virtual void Data()const;
+	virtual void Get();
+public:
+	Person(string ln , string fn) :last_name(ln), first_name(fn) { }
+	Person() :last_name("no name"), first_name("no name") { }  
+	virtual void Show()const=0;
+	virtual void Set() = 0;
+	virtual ~Person() = 0;
+};
+
+class Gunslinger:virtual public Person
+{
+private:
+	int guns_grad;
+	double times;
+protected:
+	void Data()const;
+	void Get();
+public:
+	Gunslinger():Person(),times(0),guns_grad(0){}
+	Gunslinger(string ln, string fn, int gg=0, double t=0.0) :Person(ln, fn), guns_grad(gg), times(t) { }
+	Gunslinger(Person& p, int gg ,double t) :Person(p), guns_grad(gg),times(t) { }
+	//Gunslinger(string ln , string fn = "name", int gg = 0) :Person(ln, fn), guns_grad(gg) { }
+	void Set();
+	void Show()const;
+	double Draw() { return times; }
+};
+
+class PokerPlayer :virtual public Person
+{
+
+public:
+	PokerPlayer(): Person(){ }
+	PokerPlayer( Person& p) :Person(p) { }
+	PokerPlayer(string ln, string fn) :Person(ln, fn) { }
+	void Show()const;
+	void Set();
+	int Draw()const;
+};
+
+class BadDude :public Gunslinger, public PokerPlayer
+{
+protected:
+	void Data()const;
+	void Get();
+public:
+	BadDude() :Person() ,Gunslinger(),PokerPlayer(){ }
+	BadDude( Person& p,int gg,double tm) :Person(p), Gunslinger(p,gg,tm), PokerPlayer(p) { }
+	BadDude(string ln , string fn ,int gg,double tm) :Person(ln, fn), Gunslinger(ln, fn,gg,tm), PokerPlayer(ln, fn) { }
+	void Show()const;
+	void Set();
+	double Gdraw();
+	int Cdraw()const;
+};
+#endif // !PERSON_H_
+
