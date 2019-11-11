@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cctype>
+using namespace std;
+
+bool palindrome(string& str);
+
+int main()
+{
+	string pa;
+	cout << "Enter a string:";
+	getline(cin, pa);
+	if (palindrome(pa)==true)
+		cout << "TRUE!!!It's palindrome!";
+	else
+		cout << "FALSE!!!It;s not.";
+	return 0;
+}
+
+bool palindrome(string& str)
+{
+	string palind;
+	string::size_type pos = 0;
+	string caps(",.\"\'?!:");//标点符号子字符串
+	while ((pos = str.find_first_of(caps, pos)) != string::npos)//寻找字符串中标点符号的位置
+	{
+		str.erase(pos, 1);//去除标点符号
+	}
+	transform(str.begin(), str.end(), str.begin(), tolower);
+	copy(str.rbegin(), str.rend(), back_insert_iterator<string>(palind));
+	return palind == str;
+}
