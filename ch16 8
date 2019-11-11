@@ -1,0 +1,46 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+
+void show(const std::string& frien) { std::cout << frien << std::endl; }
+
+int main()
+{
+	using std::vector;
+	using std::cout;
+	using std::endl;
+	using std::cin;
+	using std::string;
+	using std::sort;
+
+	vector<string> Mat_friends;
+	string fname;
+	cout << "Enter Mat's friends' names(quit to quit) :";
+	while (cin >> fname && fname != "quit")
+		Mat_friends.push_back(fname);
+	cin.get();
+	sort(Mat_friends.begin(), Mat_friends.end());
+	std::for_each(Mat_friends.begin(), Mat_friends.end(), show);
+	putchar('\n');
+	vector<string> Pat_friends;
+	cout << "Enter Pat's friends' names(quit to quit) :";
+	while (cin >> fname && fname != "quit")
+		Pat_friends.push_back(fname);
+	cin.get();
+	sort(Pat_friends.begin(), Pat_friends.end());
+	std::for_each(Pat_friends.begin(), Pat_friends.end(), show);
+	putchar('\n');
+	vector<string> all_friends;
+	all_friends.reserve(Mat_friends.size() + Pat_friends.size());
+	all_friends.insert(all_friends.end(), Mat_friends.begin(), Mat_friends.end());
+	all_friends.insert(all_friends.end(), Pat_friends.begin(), Pat_friends.end());
+
+	sort(all_friends.begin(), all_friends.end());
+	vector<string>::iterator fr;
+	fr = std::unique(all_friends.begin(), all_friends.end());
+	std::for_each(all_friends.begin(), all_friends.end(), show);
+	putchar('\n');
+	cout << "Bye!Bye!\n";
+	return 0;
+}
