@@ -1,0 +1,30 @@
+#include <iostream>
+
+#include <vector>
+#include <algorithm>
+
+using std::vector;
+vector<int> Lotto(int range, int size);
+int main()
+{
+
+	vector<int> winner = Lotto(51, 6);
+	for (int i = 0; i < 6; i++)
+		std::cout << winner[i] << ' ';
+	return 0;
+}
+
+vector<int> Lotto(int range, int size)
+{
+	vector<int> tickets(range);
+	for (int i = 0; i < range; i++)
+	{
+		tickets[i] = i + 1;
+	}
+	std::random_shuffle(tickets.begin(), tickets.end());
+	vector<int> number(size);
+	vector<int>::iterator start=tickets.begin();
+	for (int i = 0; i < size; i++,start++)
+		number[i] = *start;
+	return number;
+}
